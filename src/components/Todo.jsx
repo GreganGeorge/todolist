@@ -41,6 +41,16 @@ const Todo = () => {
             })
         })
     }
+    const updateTodo=(newtext,id)=>{
+        setTodoList((prev)=>{
+            return prev.map((todo)=>{
+                if(todo.id===id){
+                    return {...todo,text:newtext}
+                }
+                return todo;
+            })
+        })
+    }
     useEffect(()=>{
         localStorage.setItem("todo_items",JSON.stringify(todoList))
     },[todoList])
@@ -59,8 +69,8 @@ const Todo = () => {
         </div>
         <div>
             {todoList.map((item,index)=>{
-                return <TodoItems key={index} id={item.id} isComplete={item.isComplete} text={item.text} 
-                date={item.date} deleteTodo={deleteTodo} toggleTodo={toggleTodo}/>
+                return <TodoItems key={item.id} id={item.id} isComplete={item.isComplete} text={item.text} 
+                date={item.date} deleteTodo={deleteTodo} toggleTodo={toggleTodo} updateTodo={updateTodo}/>
             })}
         </div>
     </div>
